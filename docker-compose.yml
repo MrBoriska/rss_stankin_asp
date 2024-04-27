@@ -1,0 +1,9 @@
+version: "3"
+services:
+  stankin_rss:
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    ports:
+      - "3000:80"
+    privileged: true
