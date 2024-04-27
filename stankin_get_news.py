@@ -16,16 +16,7 @@ class MyServer(BaseHTTPRequestHandler):
                 "Accept": "application/json, text/plain, */*",
                 "Accept-Encoding": "gzip, deflate, br",
                 "Accept-Language": "ru,en;q=0.9",
-                #"Connection": "keep-alive",
-                #"Content-Length": "130",
                 "Content-Type": "application/json;charset=UTF-8",
-                #"Cookie": "_ym_uid=1714112273861660705; _ym_d=1714112273; _ym_isad=2",
-                #"Host": "stankin.ru",
-                #"Origin": "https://stankin.ru",
-                #"Referer": "https://stankin.ru/pages/id_79/news_1",
-                #"Sec-Fetch-Dest": "empty",
-                #"Sec-Fetch-Mode": "cors",
-                #"Sec-Fetch-Site": "same-origin"
             }
             payload = {
                 "action":"getNews",
@@ -45,12 +36,8 @@ class MyServer(BaseHTTPRequestHandler):
             fg = FeedGenerator()
             fg.id('http://borislap.ru/stankin_get_news.py')
             fg.title('Аспирантура News')
-            #fg.author( {'name':'John Doe','email':'john@example.de'} )
             fg.description("Список новостей аспирантура")
             fg.link( href='http://borislap.ru', rel='alternate' )
-            #fg.logo('http://ex.com/logo.jpg')
-            #fg.subtitle('This is a cool feed!')
-            #fg.link( href='http://larskiesow.de/test.atom', rel='self' )
             fg.language('ru')
 
             for item in res.json()["data"]["news"]:
@@ -68,12 +55,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "text/xml")
             self.end_headers()
-            #self.wfile.write(bytes(rssfeed, "utf-8"))
-            #self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
-            #self.wfile.write(bytes("<body>", "utf-8"))
-            #self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
             self.wfile.write(rssfeed)
-            #self.wfile.write(bytes("</body></html>", "utf-8"))
         else:
             self.send_error(404, "Not found")
 
