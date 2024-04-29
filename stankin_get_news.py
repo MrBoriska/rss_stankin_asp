@@ -37,10 +37,11 @@ class MyServer(BaseHTTPRequestHandler):
             fg.id('http://borislap.ru/stankin_get_news.py')
             fg.title('Аспирантура News')
             fg.description("Список новостей аспирантура")
-            fg.link( href='http://borislap.ru', rel='alternate' )
+            fg.link(href='http://borislap.ru', rel='alternate')
             fg.language('ru')
-
-            for item in res.json()["data"]["news"]:
+            
+            news = res.json()["data"]["news"]
+            for item in reversed(news):
                 id = item["id"]
                 link = f"https://stankin.ru/news/item_{id}"
                 fe = fg.add_entry()
@@ -51,6 +52,8 @@ class MyServer(BaseHTTPRequestHandler):
                 fe.pubDate(item["date"])
 
             rssfeed  = fg.rss_str(pretty=True) # Get the RSS feed as string
+
+            fg.lastBuildDate(news[0]["date"])
 
             self.send_response(200)
             self.send_header("Content-type", "text/xml")
