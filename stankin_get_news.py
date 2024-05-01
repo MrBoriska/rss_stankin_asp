@@ -31,7 +31,7 @@ class MyServer(BaseHTTPRequestHandler):
                 }
             }
 
-            res = requests.post(url="https://stankin.ru/api_entry.php", json=payload, headers=headers)
+            res = requests.post(url="https://stankin.ru/api_entry.php", json=payload, headers=headers, timeout=10)
 
             fg = FeedGenerator()
             fg.id('http://borislap.ru/stankin_get_news.py')
